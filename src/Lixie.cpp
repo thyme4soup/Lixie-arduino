@@ -23,6 +23,15 @@ Lixie::Lixie(const uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDi
 	
 	build_controller(pin);
 }
+Lixie::Lixie(const uint8_t pin, uint8_t nIcons, enum icons):NumDigits(1), NumLEDS(nDigits * nIcons * 2) {
+	leds = new CRGB[NumLEDs];
+	led_states = new byte[NumDigits * 3]; // 24 bits for 20 LED states
+	colors = new CRGB[NumDigits];
+	colors_off = new CRGB[NumDigits];
+	digit_brightness = new byte[NumDigits];
+	
+	build_controller(pin);
+}
 
 CRGB enforce_brightness(CRGB input){
 	/*
